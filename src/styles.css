@@ -60,6 +60,8 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.871 0.006 286.286);
+
+  
 }
 
 .dark {
@@ -318,6 +320,19 @@ a {
 
 .rise-in {
   animation: rise-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.container-padding {
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 6);
+
+  @media (width >= 40rem /* 640px */) {
+    padding-inline: calc(var(--spacing) * 6) /* 1.5rem = 24px */;
+  };
+
+  @media (width >= 64rem /* 1024px */) {
+    padding-inline: calc(var(--spacing) * 8) /* 2rem = 32px */;
+  }
 }
 
 @keyframes rise-in {

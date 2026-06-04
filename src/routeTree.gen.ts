@@ -9,12 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as SignInRouteImport } from './routes/sign-in'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as DomesticRouteRouteImport } from './routes/domestic/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InternationalIndexRouteImport } from './routes/international/index'
 import { Route as HajjAndUmrahIndexRouteImport } from './routes/hajj-and-umrah/index'
 import { Route as DomesticIndexRouteImport } from './routes/domestic/index'
+import { Route as DomesticContactRouteImport } from './routes/domestic/contact'
+import { Route as DomesticAboutRouteImport } from './routes/domestic/about'
+import { Route as DomesticToursIndexRouteImport } from './routes/domestic/tours/index'
+import { Route as DomesticThemesIndexRouteImport } from './routes/domestic/themes/index'
+import { Route as DomesticTermsIndexRouteImport } from './routes/domestic/terms/index'
+import { Route as DomesticPrivacyIndexRouteImport } from './routes/domestic/privacy/index'
+import { Route as DomesticDestinationsIndexRouteImport } from './routes/domestic/destinations/index'
+import { Route as DomesticCustomTripIndexRouteImport } from './routes/domestic/custom-trip/index'
+import { Route as DomesticCancellationPolicyIndexRouteImport } from './routes/domestic/cancellation-policy/index'
+import { Route as DomesticBookingsIndexRouteImport } from './routes/domestic/bookings/index'
+import { Route as DomesticDestinationsSlugRouteImport } from './routes/domestic/destinations/$slug'
+import { Route as DomesticBookingsBookingIdRouteImport } from './routes/domestic/bookings/$bookingId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as DomesticToursTourIdIndexRouteImport } from './routes/domestic/tours/$tourId/index'
+import { Route as DomesticToursTourIdBookRouteImport } from './routes/domestic/tours/$tourId/book'
 
+const SignUpRoute = SignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DomesticRouteRoute = DomesticRouteRouteImport.update({
+  id: '/domestic',
+  path: '/domestic',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,60 +75,256 @@ const HajjAndUmrahIndexRoute = HajjAndUmrahIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const DomesticIndexRoute = DomesticIndexRouteImport.update({
-  id: '/domestic/',
-  path: '/domestic/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => DomesticRouteRoute,
 } as any)
+const DomesticContactRoute = DomesticContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticAboutRoute = DomesticAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticToursIndexRoute = DomesticToursIndexRouteImport.update({
+  id: '/tours/',
+  path: '/tours/',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticThemesIndexRoute = DomesticThemesIndexRouteImport.update({
+  id: '/themes/',
+  path: '/themes/',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticTermsIndexRoute = DomesticTermsIndexRouteImport.update({
+  id: '/terms/',
+  path: '/terms/',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticPrivacyIndexRoute = DomesticPrivacyIndexRouteImport.update({
+  id: '/privacy/',
+  path: '/privacy/',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticDestinationsIndexRoute =
+  DomesticDestinationsIndexRouteImport.update({
+    id: '/destinations/',
+    path: '/destinations/',
+    getParentRoute: () => DomesticRouteRoute,
+  } as any)
+const DomesticCustomTripIndexRoute = DomesticCustomTripIndexRouteImport.update({
+  id: '/custom-trip/',
+  path: '/custom-trip/',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticCancellationPolicyIndexRoute =
+  DomesticCancellationPolicyIndexRouteImport.update({
+    id: '/cancellation-policy/',
+    path: '/cancellation-policy/',
+    getParentRoute: () => DomesticRouteRoute,
+  } as any)
+const DomesticBookingsIndexRoute = DomesticBookingsIndexRouteImport.update({
+  id: '/bookings/',
+  path: '/bookings/',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
+const DomesticDestinationsSlugRoute =
+  DomesticDestinationsSlugRouteImport.update({
+    id: '/destinations/$slug',
+    path: '/destinations/$slug',
+    getParentRoute: () => DomesticRouteRoute,
+  } as any)
+const DomesticBookingsBookingIdRoute =
+  DomesticBookingsBookingIdRouteImport.update({
+    id: '/bookings/$bookingId',
+    path: '/bookings/$bookingId',
+    getParentRoute: () => DomesticRouteRoute,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DomesticToursTourIdIndexRoute =
+  DomesticToursTourIdIndexRouteImport.update({
+    id: '/tours/$tourId/',
+    path: '/tours/$tourId/',
+    getParentRoute: () => DomesticRouteRoute,
+  } as any)
+const DomesticToursTourIdBookRoute = DomesticToursTourIdBookRouteImport.update({
+  id: '/tours/$tourId/book',
+  path: '/tours/$tourId/book',
+  getParentRoute: () => DomesticRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/domestic': typeof DomesticRouteRouteWithChildren
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/domestic/about': typeof DomesticAboutRoute
+  '/domestic/contact': typeof DomesticContactRoute
   '/domestic/': typeof DomesticIndexRoute
   '/hajj-and-umrah/': typeof HajjAndUmrahIndexRoute
   '/international/': typeof InternationalIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/domestic/bookings/$bookingId': typeof DomesticBookingsBookingIdRoute
+  '/domestic/destinations/$slug': typeof DomesticDestinationsSlugRoute
+  '/domestic/bookings/': typeof DomesticBookingsIndexRoute
+  '/domestic/cancellation-policy/': typeof DomesticCancellationPolicyIndexRoute
+  '/domestic/custom-trip/': typeof DomesticCustomTripIndexRoute
+  '/domestic/destinations/': typeof DomesticDestinationsIndexRoute
+  '/domestic/privacy/': typeof DomesticPrivacyIndexRoute
+  '/domestic/terms/': typeof DomesticTermsIndexRoute
+  '/domestic/themes/': typeof DomesticThemesIndexRoute
+  '/domestic/tours/': typeof DomesticToursIndexRoute
+  '/domestic/tours/$tourId/book': typeof DomesticToursTourIdBookRoute
+  '/domestic/tours/$tourId/': typeof DomesticToursTourIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/domestic/about': typeof DomesticAboutRoute
+  '/domestic/contact': typeof DomesticContactRoute
   '/domestic': typeof DomesticIndexRoute
   '/hajj-and-umrah': typeof HajjAndUmrahIndexRoute
   '/international': typeof InternationalIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/domestic/bookings/$bookingId': typeof DomesticBookingsBookingIdRoute
+  '/domestic/destinations/$slug': typeof DomesticDestinationsSlugRoute
+  '/domestic/bookings': typeof DomesticBookingsIndexRoute
+  '/domestic/cancellation-policy': typeof DomesticCancellationPolicyIndexRoute
+  '/domestic/custom-trip': typeof DomesticCustomTripIndexRoute
+  '/domestic/destinations': typeof DomesticDestinationsIndexRoute
+  '/domestic/privacy': typeof DomesticPrivacyIndexRoute
+  '/domestic/terms': typeof DomesticTermsIndexRoute
+  '/domestic/themes': typeof DomesticThemesIndexRoute
+  '/domestic/tours': typeof DomesticToursIndexRoute
+  '/domestic/tours/$tourId/book': typeof DomesticToursTourIdBookRoute
+  '/domestic/tours/$tourId': typeof DomesticToursTourIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/domestic': typeof DomesticRouteRouteWithChildren
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/domestic/about': typeof DomesticAboutRoute
+  '/domestic/contact': typeof DomesticContactRoute
   '/domestic/': typeof DomesticIndexRoute
   '/hajj-and-umrah/': typeof HajjAndUmrahIndexRoute
   '/international/': typeof InternationalIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/domestic/bookings/$bookingId': typeof DomesticBookingsBookingIdRoute
+  '/domestic/destinations/$slug': typeof DomesticDestinationsSlugRoute
+  '/domestic/bookings/': typeof DomesticBookingsIndexRoute
+  '/domestic/cancellation-policy/': typeof DomesticCancellationPolicyIndexRoute
+  '/domestic/custom-trip/': typeof DomesticCustomTripIndexRoute
+  '/domestic/destinations/': typeof DomesticDestinationsIndexRoute
+  '/domestic/privacy/': typeof DomesticPrivacyIndexRoute
+  '/domestic/terms/': typeof DomesticTermsIndexRoute
+  '/domestic/themes/': typeof DomesticThemesIndexRoute
+  '/domestic/tours/': typeof DomesticToursIndexRoute
+  '/domestic/tours/$tourId/book': typeof DomesticToursTourIdBookRoute
+  '/domestic/tours/$tourId/': typeof DomesticToursTourIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/domestic'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/sign-in'
+    | '/sign-up'
+    | '/domestic/about'
+    | '/domestic/contact'
     | '/domestic/'
     | '/hajj-and-umrah/'
     | '/international/'
     | '/api/auth/$'
+    | '/domestic/bookings/$bookingId'
+    | '/domestic/destinations/$slug'
+    | '/domestic/bookings/'
+    | '/domestic/cancellation-policy/'
+    | '/domestic/custom-trip/'
+    | '/domestic/destinations/'
+    | '/domestic/privacy/'
+    | '/domestic/terms/'
+    | '/domestic/themes/'
+    | '/domestic/tours/'
+    | '/domestic/tours/$tourId/book'
+    | '/domestic/tours/$tourId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/domestic' | '/hajj-and-umrah' | '/international' | '/api/auth/$'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/sign-in'
+    | '/sign-up'
+    | '/domestic/about'
+    | '/domestic/contact'
+    | '/domestic'
+    | '/hajj-and-umrah'
+    | '/international'
+    | '/api/auth/$'
+    | '/domestic/bookings/$bookingId'
+    | '/domestic/destinations/$slug'
+    | '/domestic/bookings'
+    | '/domestic/cancellation-policy'
+    | '/domestic/custom-trip'
+    | '/domestic/destinations'
+    | '/domestic/privacy'
+    | '/domestic/terms'
+    | '/domestic/themes'
+    | '/domestic/tours'
+    | '/domestic/tours/$tourId/book'
+    | '/domestic/tours/$tourId'
   id:
     | '__root__'
     | '/'
+    | '/domestic'
+    | '/forgot-password'
+    | '/reset-password'
+    | '/sign-in'
+    | '/sign-up'
+    | '/domestic/about'
+    | '/domestic/contact'
     | '/domestic/'
     | '/hajj-and-umrah/'
     | '/international/'
     | '/api/auth/$'
+    | '/domestic/bookings/$bookingId'
+    | '/domestic/destinations/$slug'
+    | '/domestic/bookings/'
+    | '/domestic/cancellation-policy/'
+    | '/domestic/custom-trip/'
+    | '/domestic/destinations/'
+    | '/domestic/privacy/'
+    | '/domestic/terms/'
+    | '/domestic/themes/'
+    | '/domestic/tours/'
+    | '/domestic/tours/$tourId/book'
+    | '/domestic/tours/$tourId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DomesticIndexRoute: typeof DomesticIndexRoute
+  DomesticRouteRoute: typeof DomesticRouteRouteWithChildren
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SignInRoute: typeof SignInRoute
+  SignUpRoute: typeof SignUpRoute
   HajjAndUmrahIndexRoute: typeof HajjAndUmrahIndexRoute
   InternationalIndexRoute: typeof InternationalIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -92,6 +332,41 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sign-up': {
+      id: '/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/domestic': {
+      id: '/domestic'
+      path: '/domestic'
+      fullPath: '/domestic'
+      preLoaderRoute: typeof DomesticRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -115,10 +390,94 @@ declare module '@tanstack/react-router' {
     }
     '/domestic/': {
       id: '/domestic/'
-      path: '/domestic'
+      path: '/'
       fullPath: '/domestic/'
       preLoaderRoute: typeof DomesticIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/contact': {
+      id: '/domestic/contact'
+      path: '/contact'
+      fullPath: '/domestic/contact'
+      preLoaderRoute: typeof DomesticContactRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/about': {
+      id: '/domestic/about'
+      path: '/about'
+      fullPath: '/domestic/about'
+      preLoaderRoute: typeof DomesticAboutRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/tours/': {
+      id: '/domestic/tours/'
+      path: '/tours'
+      fullPath: '/domestic/tours/'
+      preLoaderRoute: typeof DomesticToursIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/themes/': {
+      id: '/domestic/themes/'
+      path: '/themes'
+      fullPath: '/domestic/themes/'
+      preLoaderRoute: typeof DomesticThemesIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/terms/': {
+      id: '/domestic/terms/'
+      path: '/terms'
+      fullPath: '/domestic/terms/'
+      preLoaderRoute: typeof DomesticTermsIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/privacy/': {
+      id: '/domestic/privacy/'
+      path: '/privacy'
+      fullPath: '/domestic/privacy/'
+      preLoaderRoute: typeof DomesticPrivacyIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/destinations/': {
+      id: '/domestic/destinations/'
+      path: '/destinations'
+      fullPath: '/domestic/destinations/'
+      preLoaderRoute: typeof DomesticDestinationsIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/custom-trip/': {
+      id: '/domestic/custom-trip/'
+      path: '/custom-trip'
+      fullPath: '/domestic/custom-trip/'
+      preLoaderRoute: typeof DomesticCustomTripIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/cancellation-policy/': {
+      id: '/domestic/cancellation-policy/'
+      path: '/cancellation-policy'
+      fullPath: '/domestic/cancellation-policy/'
+      preLoaderRoute: typeof DomesticCancellationPolicyIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/bookings/': {
+      id: '/domestic/bookings/'
+      path: '/bookings'
+      fullPath: '/domestic/bookings/'
+      preLoaderRoute: typeof DomesticBookingsIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/destinations/$slug': {
+      id: '/domestic/destinations/$slug'
+      path: '/destinations/$slug'
+      fullPath: '/domestic/destinations/$slug'
+      preLoaderRoute: typeof DomesticDestinationsSlugRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/bookings/$bookingId': {
+      id: '/domestic/bookings/$bookingId'
+      path: '/bookings/$bookingId'
+      fullPath: '/domestic/bookings/$bookingId'
+      preLoaderRoute: typeof DomesticBookingsBookingIdRouteImport
+      parentRoute: typeof DomesticRouteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -127,12 +486,70 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/domestic/tours/$tourId/': {
+      id: '/domestic/tours/$tourId/'
+      path: '/tours/$tourId'
+      fullPath: '/domestic/tours/$tourId/'
+      preLoaderRoute: typeof DomesticToursTourIdIndexRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
+    '/domestic/tours/$tourId/book': {
+      id: '/domestic/tours/$tourId/book'
+      path: '/tours/$tourId/book'
+      fullPath: '/domestic/tours/$tourId/book'
+      preLoaderRoute: typeof DomesticToursTourIdBookRouteImport
+      parentRoute: typeof DomesticRouteRoute
+    }
   }
 }
 
+interface DomesticRouteRouteChildren {
+  DomesticAboutRoute: typeof DomesticAboutRoute
+  DomesticContactRoute: typeof DomesticContactRoute
+  DomesticIndexRoute: typeof DomesticIndexRoute
+  DomesticBookingsBookingIdRoute: typeof DomesticBookingsBookingIdRoute
+  DomesticDestinationsSlugRoute: typeof DomesticDestinationsSlugRoute
+  DomesticBookingsIndexRoute: typeof DomesticBookingsIndexRoute
+  DomesticCancellationPolicyIndexRoute: typeof DomesticCancellationPolicyIndexRoute
+  DomesticCustomTripIndexRoute: typeof DomesticCustomTripIndexRoute
+  DomesticDestinationsIndexRoute: typeof DomesticDestinationsIndexRoute
+  DomesticPrivacyIndexRoute: typeof DomesticPrivacyIndexRoute
+  DomesticTermsIndexRoute: typeof DomesticTermsIndexRoute
+  DomesticThemesIndexRoute: typeof DomesticThemesIndexRoute
+  DomesticToursIndexRoute: typeof DomesticToursIndexRoute
+  DomesticToursTourIdBookRoute: typeof DomesticToursTourIdBookRoute
+  DomesticToursTourIdIndexRoute: typeof DomesticToursTourIdIndexRoute
+}
+
+const DomesticRouteRouteChildren: DomesticRouteRouteChildren = {
+  DomesticAboutRoute: DomesticAboutRoute,
+  DomesticContactRoute: DomesticContactRoute,
+  DomesticIndexRoute: DomesticIndexRoute,
+  DomesticBookingsBookingIdRoute: DomesticBookingsBookingIdRoute,
+  DomesticDestinationsSlugRoute: DomesticDestinationsSlugRoute,
+  DomesticBookingsIndexRoute: DomesticBookingsIndexRoute,
+  DomesticCancellationPolicyIndexRoute: DomesticCancellationPolicyIndexRoute,
+  DomesticCustomTripIndexRoute: DomesticCustomTripIndexRoute,
+  DomesticDestinationsIndexRoute: DomesticDestinationsIndexRoute,
+  DomesticPrivacyIndexRoute: DomesticPrivacyIndexRoute,
+  DomesticTermsIndexRoute: DomesticTermsIndexRoute,
+  DomesticThemesIndexRoute: DomesticThemesIndexRoute,
+  DomesticToursIndexRoute: DomesticToursIndexRoute,
+  DomesticToursTourIdBookRoute: DomesticToursTourIdBookRoute,
+  DomesticToursTourIdIndexRoute: DomesticToursTourIdIndexRoute,
+}
+
+const DomesticRouteRouteWithChildren = DomesticRouteRoute._addFileChildren(
+  DomesticRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DomesticIndexRoute: DomesticIndexRoute,
+  DomesticRouteRoute: DomesticRouteRouteWithChildren,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
   HajjAndUmrahIndexRoute: HajjAndUmrahIndexRoute,
   InternationalIndexRoute: InternationalIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
