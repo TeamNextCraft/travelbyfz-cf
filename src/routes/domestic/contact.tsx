@@ -17,7 +17,6 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button, buttonVariants } from "#/components/ui/button";
 import { Input } from "#/components/ui/input";
@@ -346,14 +345,7 @@ function FormAndOfficesSection() {
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+  const form = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -364,18 +356,17 @@ function ContactForm() {
       groupSize: "",
       message: "",
     },
+    validators: {
+      onSubmit: contactSchema,
+    },
+    onSubmit: async (values) => {
+
+    },
   });
 
-  const subject = watch("subject");
+  const subject = form.watch("subject");
   const showTripFields =
     subject === "new-booking" || subject === "custom-itinerary";
-
-  const onSubmit = async (_data: ContactFormData) => {
-    // Wire to createServerFn:
-    // await submitContactForm({ data: _data });
-    await new Promise((r) => setTimeout(r, 1400));
-    setSubmitted(true);
-  };
 
   if (submitted) {
     return (
@@ -419,7 +410,11 @@ function ContactForm() {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        form.handleSubmit();
+        setSubmitted(true);
+      }}
       className="space-y-5"
       noValidate
     >

@@ -367,7 +367,7 @@ const domesticNavItems = [
   },
 ];
 
-export function Navbar({ transparent = false }: { transparent?: boolean }) {
+export function DomesticNavbar({ transparent = false }: { transparent?: boolean }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = useRouterState({
     select: (s) => s.location.pathname,
@@ -386,7 +386,7 @@ export function Navbar({ transparent = false }: { transparent?: boolean }) {
         {/* Brand */}
         <div className="flex min-w-0 items-center gap-3">
           <Link
-            to="/domestic"
+            to="/"
             className="flex items-center gap-3 rounded-lg transition-opacity hover:opacity-90"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123f45] text-white shadow-sm">

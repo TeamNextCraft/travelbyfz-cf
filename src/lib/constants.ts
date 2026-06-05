@@ -14,7 +14,7 @@ export const bookingOptions = [
   {
     title: "Hajj & Umrah",
     description: "Pilgrimage packages, visa support, Makkah and Madinah stays.",
-    to: "/hajj-and-umrah",
+    to: "/hajj-umrah",
     image:
       "https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?auto=format&fit=crop&w=900&q=80",
     icon: MoonStar,

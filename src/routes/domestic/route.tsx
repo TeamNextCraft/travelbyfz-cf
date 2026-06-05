@@ -1,5 +1,5 @@
 import { Footer } from "#/components/common/domestic/footer.tsx";
-import { Navbar } from "#/components/common/domestic/nav-bar.tsx";
+import { DomesticNavbar } from "#/components/common/domestic/nav-bar.tsx";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/domestic")({
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/domestic")({
 function RouteComponent() {
   return (
     <main>
-      <Navbar />
+      <DomesticNavbar />
       <Outlet />
       <Footer />
     </main>
