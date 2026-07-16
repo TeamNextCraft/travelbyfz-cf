@@ -19,6 +19,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as InternationalIndexRouteImport } from './routes/international/index'
 import { Route as HajjUmrahIndexRouteImport } from './routes/hajj-umrah/index'
 import { Route as DomesticIndexRouteImport } from './routes/domestic/index'
+import { Route as InvitationWebinarRouteImport } from './routes/invitation/webinar'
 import { Route as HajjUmrahVisaRouteImport } from './routes/hajj-umrah/visa'
 import { Route as HajjUmrahProcessRouteImport } from './routes/hajj-umrah/process'
 import { Route as HajjUmrahGalleryRouteImport } from './routes/hajj-umrah/gallery'
@@ -38,6 +39,7 @@ import { Route as DomesticCancellationPolicyIndexRouteImport } from './routes/do
 import { Route as DomesticBookingsIndexRouteImport } from './routes/domestic/bookings/index'
 import { Route as DomesticDestinationsSlugRouteImport } from './routes/domestic/destinations/$slug'
 import { Route as DomesticBookingsBookingIdRouteImport } from './routes/domestic/bookings/$bookingId'
+import { Route as ApiWebhooksRazorpayRouteImport } from './routes/api/webhooks/razorpay'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as HajjUmrahPackagesPackageIdIndexRouteImport } from './routes/hajj-umrah/packages/$packageId/index'
 import { Route as DomesticToursTourIdIndexRouteImport } from './routes/domestic/tours/$tourId/index'
@@ -92,6 +94,11 @@ const DomesticIndexRoute = DomesticIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DomesticRouteRoute,
+} as any)
+const InvitationWebinarRoute = InvitationWebinarRouteImport.update({
+  id: '/invitation/webinar',
+  path: '/invitation/webinar',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const HajjUmrahVisaRoute = HajjUmrahVisaRouteImport.update({
   id: '/visa',
@@ -192,6 +199,11 @@ const DomesticBookingsBookingIdRoute =
     path: '/bookings/$bookingId',
     getParentRoute: () => DomesticRouteRoute,
   } as any)
+const ApiWebhooksRazorpayRoute = ApiWebhooksRazorpayRouteImport.update({
+  id: '/api/webhooks/razorpay',
+  path: '/api/webhooks/razorpay',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -231,10 +243,12 @@ export interface FileRoutesByFullPath {
   '/hajj-umrah/gallery': typeof HajjUmrahGalleryRoute
   '/hajj-umrah/process': typeof HajjUmrahProcessRoute
   '/hajj-umrah/visa': typeof HajjUmrahVisaRoute
+  '/invitation/webinar': typeof InvitationWebinarRoute
   '/domestic/': typeof DomesticIndexRoute
   '/hajj-umrah/': typeof HajjUmrahIndexRoute
   '/international/': typeof InternationalIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
   '/domestic/bookings/$bookingId': typeof DomesticBookingsBookingIdRoute
   '/domestic/destinations/$slug': typeof DomesticDestinationsSlugRoute
   '/domestic/bookings/': typeof DomesticBookingsIndexRoute
@@ -264,10 +278,12 @@ export interface FileRoutesByTo {
   '/hajj-umrah/gallery': typeof HajjUmrahGalleryRoute
   '/hajj-umrah/process': typeof HajjUmrahProcessRoute
   '/hajj-umrah/visa': typeof HajjUmrahVisaRoute
+  '/invitation/webinar': typeof InvitationWebinarRoute
   '/domestic': typeof DomesticIndexRoute
   '/hajj-umrah': typeof HajjUmrahIndexRoute
   '/international': typeof InternationalIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
   '/domestic/bookings/$bookingId': typeof DomesticBookingsBookingIdRoute
   '/domestic/destinations/$slug': typeof DomesticDestinationsSlugRoute
   '/domestic/bookings': typeof DomesticBookingsIndexRoute
@@ -300,10 +316,12 @@ export interface FileRoutesById {
   '/hajj-umrah/gallery': typeof HajjUmrahGalleryRoute
   '/hajj-umrah/process': typeof HajjUmrahProcessRoute
   '/hajj-umrah/visa': typeof HajjUmrahVisaRoute
+  '/invitation/webinar': typeof InvitationWebinarRoute
   '/domestic/': typeof DomesticIndexRoute
   '/hajj-umrah/': typeof HajjUmrahIndexRoute
   '/international/': typeof InternationalIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
   '/domestic/bookings/$bookingId': typeof DomesticBookingsBookingIdRoute
   '/domestic/destinations/$slug': typeof DomesticDestinationsSlugRoute
   '/domestic/bookings/': typeof DomesticBookingsIndexRoute
@@ -337,10 +355,12 @@ export interface FileRouteTypes {
     | '/hajj-umrah/gallery'
     | '/hajj-umrah/process'
     | '/hajj-umrah/visa'
+    | '/invitation/webinar'
     | '/domestic/'
     | '/hajj-umrah/'
     | '/international/'
     | '/api/auth/$'
+    | '/api/webhooks/razorpay'
     | '/domestic/bookings/$bookingId'
     | '/domestic/destinations/$slug'
     | '/domestic/bookings/'
@@ -370,10 +390,12 @@ export interface FileRouteTypes {
     | '/hajj-umrah/gallery'
     | '/hajj-umrah/process'
     | '/hajj-umrah/visa'
+    | '/invitation/webinar'
     | '/domestic'
     | '/hajj-umrah'
     | '/international'
     | '/api/auth/$'
+    | '/api/webhooks/razorpay'
     | '/domestic/bookings/$bookingId'
     | '/domestic/destinations/$slug'
     | '/domestic/bookings'
@@ -405,10 +427,12 @@ export interface FileRouteTypes {
     | '/hajj-umrah/gallery'
     | '/hajj-umrah/process'
     | '/hajj-umrah/visa'
+    | '/invitation/webinar'
     | '/domestic/'
     | '/hajj-umrah/'
     | '/international/'
     | '/api/auth/$'
+    | '/api/webhooks/razorpay'
     | '/domestic/bookings/$bookingId'
     | '/domestic/destinations/$slug'
     | '/domestic/bookings/'
@@ -433,8 +457,10 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
+  InvitationWebinarRoute: typeof InvitationWebinarRoute
   InternationalIndexRoute: typeof InternationalIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiWebhooksRazorpayRoute: typeof ApiWebhooksRazorpayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -508,6 +534,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/domestic/'
       preLoaderRoute: typeof DomesticIndexRouteImport
       parentRoute: typeof DomesticRouteRoute
+    }
+    '/invitation/webinar': {
+      id: '/invitation/webinar'
+      path: '/invitation/webinar'
+      fullPath: '/invitation/webinar'
+      preLoaderRoute: typeof InvitationWebinarRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/hajj-umrah/visa': {
       id: '/hajj-umrah/visa'
@@ -642,6 +675,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DomesticBookingsBookingIdRouteImport
       parentRoute: typeof DomesticRouteRoute
     }
+    '/api/webhooks/razorpay': {
+      id: '/api/webhooks/razorpay'
+      path: '/api/webhooks/razorpay'
+      fullPath: '/api/webhooks/razorpay'
+      preLoaderRoute: typeof ApiWebhooksRazorpayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -749,8 +789,10 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
+  InvitationWebinarRoute: InvitationWebinarRoute,
   InternationalIndexRoute: InternationalIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiWebhooksRazorpayRoute: ApiWebhooksRazorpayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
