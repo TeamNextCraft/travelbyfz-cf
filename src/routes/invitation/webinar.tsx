@@ -9,6 +9,7 @@ import { createWebinarOrder, verifyWebinarPayment } from "#/server/actions/webin
 import { Badge } from "#/components/ui/badge";
 import { buttonVariants } from "#/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
+import { WebinarRegistrationForm } from "#/components/common/webinar-registration-form";
 
 export const Route = createFileRoute("/invitation/webinar")({
   component: WebinarPage,
@@ -396,66 +397,7 @@ function WebinarPage() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleRegister} className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-900">Full name</label>
-                    <input
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="h-11 w-full rounded-xl border border-input px-3 text-sm outline-none focus:border-slate-400"
-                      placeholder="Your full name"
-                    />
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-900">Email</label>
-                      <input
-                        type="email"
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="h-11 w-full rounded-xl border border-input px-3 text-sm outline-none focus:border-slate-400"
-                        placeholder="you@example.com"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-900">WhatsApp number</label>
-                      <input
-                        type="tel"
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="h-11 w-full rounded-xl border border-input px-3 text-sm outline-none focus:border-slate-400"
-                        placeholder="+91 9xxxx xxxxx"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-900">City</label>
-                    <input
-                      value={form.city}
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                      className="h-11 w-full rounded-xl border border-input px-3 text-sm outline-none focus:border-slate-400"
-                      placeholder="e.g. Bhuj"
-                    />
-                  </div>
-
-                  {error && <p className="text-sm text-red-600">{error}</p>}
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-slate-900 text-sm font-semibold text-white transition-colors hover:bg-slate-800 disabled:opacity-60"
-                  >
-                    <Wallet className="size-4" />
-                    {loading ? "Processing..." : "Pay ₹199 & Reserve Seat"}
-                  </button>
-
-                  <p className="flex items-center justify-center gap-2 text-xs text-slate-500">
-                    <ShieldCheck className="size-3.5" />
-                    Secured by Razorpay
-                  </p>
-                </form>
+              <WebinarRegistrationForm />
               )}
             </CardContent>
           </Card>
