@@ -31,5 +31,14 @@
   },
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit"
-  }
+  },
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "database": "${workspaceFolder:travelbyfz-cf}/.wrangler/state/v3/d1/miniflare-D1DatabaseObject/40c2e8e2cd572d46d24d6da44422e1a4668a0423964b78d20ed875e9e2af635d.sqlite",
+      "name": "test connection"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
 }

@@ -1,11 +1,9 @@
-// src/routes/webinar/travel-entrepreneur.tsx
 import { createFileRoute } from "@tanstack/react-router";
 import * as React from "react";
 import {
-  BadgeCheck, CalendarDays, CheckCircle2, Clock3, Gift, MessageCircle,
-  Phone, PlayCircle, ShieldCheck, Sparkles, Users, Video, Wallet, Star,
+  CalendarDays, CheckCircle2, Clock3, Gift, MessageCircle,
+   Sparkles, Users, Video,  Star,
 } from "lucide-react";
-import { createWebinarOrder, verifyWebinarPayment } from "#/server/actions/webinar";
 import { Badge } from "#/components/ui/badge";
 import { buttonVariants } from "#/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
@@ -114,60 +112,6 @@ function useCountdown(target: Date) {
 function WebinarPage() {
   const webinarDate = React.useMemo(() => new Date("2026-08-16T11:00:00+05:30"), []);
   const countdown = useCountdown(webinarDate);
-
-  const [form, setForm] = React.useState({ name: "", email: "", phone: "", city: "" });
-  const [loading, setLoading] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  async function handleRegister(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-
-    if (!form.name || !form.email || !form.phone) {
-      setError("Please fill in your name, email, and phone number.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const order = await createWebinarOrder({ data: form });
-
-      const rzp = new window.Razorpay({
-        key: order.key,
-        amount: order.amount,
-        currency: "INR",
-        name: "Travel Entrepreneur Webinar",
-        description: "Live Webinar Registration - 16 Aug 2026",
-        order_id: order.orderId,
-        prefill: { name: form.name, email: form.email, contact: form.phone },
-        theme: { color: "#0f172a" },
-        handler: async (response: any) => {
-          await verifyWebinarPayment({ data: response });
-          setSuccess(true);
-        },
-        modal: {
-          ondismiss: () => setLoading(false),
-        },
-      });
-
-      rzp.open();
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
 
   return (
     <main className="bg-[#faf9f6]">
@@ -385,27 +329,14 @@ function WebinarPage() {
 
           <Card className="mt-8 rounded-2xl border-none bg-white shadow-xl">
             <CardContent className="p-6 sm:p-8">
-              {success ? (
-                <div className="flex flex-col items-center py-8 text-center">
-                  <BadgeCheck className="size-12 text-emerald-600" />
-                  <h3 className="mt-4 text-xl font-semibold text-slate-900">
-                    You're Registered!
-                  </h3>
-                  <p className="mt-2 max-w-sm text-sm leading-7 text-slate-600">
-                    Confirmation sent to your email and WhatsApp. Zoom link will
-                    be shared one day before the webinar.
-                  </p>
-                </div>
-              ) : (
               <WebinarRegistrationForm />
-              )}
             </CardContent>
           </Card>
         </div>
       </section>
 
       {/* Sticky mobile CTA */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white p-3 shadow-lg lg:hidden">
+      {/* <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white p-3 shadow-lg lg:hidden">
         <a
           href="#register"
           className={buttonVariants({
@@ -414,7 +345,7 @@ function WebinarPage() {
         >
           Reserve Seat — ₹199 Only
         </a>
-      </div>
+      </div> */}
     </main>
   );
 }

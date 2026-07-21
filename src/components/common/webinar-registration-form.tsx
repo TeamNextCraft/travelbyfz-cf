@@ -21,7 +21,7 @@ export const webinarRegistrationSchema = z.object({
     .string()
     .min(2, "Name must be at least 2 characters")
     .max(80, "Name is too long"),
-  email: z.string().email("Enter a valid email address"),
+  email: z.email("Enter a valid email address"),
   phone: z
     .string()
     .regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
@@ -73,8 +73,8 @@ export function WebinarRegistrationForm() {
         key: order.key,
         amount: order.amount,
         currency: "INR",
-        name: "Travel Entrepreneur Webinar",
-        description: "Live Webinar Registration - 16 Aug 2026",
+        name: "Fatema Tu Zohra Tours & Travels",
+        description: "Live Webinar Registration",
         order_id: order.orderId,
         prefill: { name: data.name, email: data.email, contact: data.phone },
         theme: { color: "#0f172a" },
@@ -84,7 +84,7 @@ export function WebinarRegistrationForm() {
         },
         modal: {
           ondismiss: () => setLoading(false),
-        },
+        }
       });
 
       rzp.open();

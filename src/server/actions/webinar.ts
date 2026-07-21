@@ -1,10 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import Razorpay from "razorpay";
 import crypto from "node:crypto";
-import { db } from "#/db/index.ts";
-import { webinarRegistrations } from "#/db/schema";
+import { getDb } from "#/db/client";
+import { webinarRegistrations } from "#/db/schema/webinar-registrations";
 import { eq } from "drizzle-orm";
-import { sendWebinarConfirmation } from "./notifications";
+// import { sendWebinarConfirmation } from "./notifications";
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID!,
@@ -19,6 +19,10 @@ export const createWebinarOrder = createServerFn({ method: "POST" })
       data,
   )
   .handler(async ({ data }) => {
+
+    const db = getDb();
+
+
     const order = await razorpay.orders.create({
       amount: WEBINAR_AMOUNT,
       currency: "INR",
@@ -26,15 +30,20 @@ export const createWebinarOrder = createServerFn({ method: "POST" })
       notes: { name: data.name, email: data.email, phone: data.phone },
     });
 
-    await db.insert(webinarRegistrations).values({
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      city: data.city ?? null,
-      amount: WEBINAR_AMOUNT,
-      razorpayOrderId: order.id,
-      status: "created",
-    });
+    try {
+      await  db.insert(webinarRegistrations).values({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        city: data.city ?? null,
+        amount: WEBINAR_AMOUNT,
+        razorpayOrderId: order.id,
+        status: "created",
+      });
+
+    } catch (error) {
+      throw new Error("Failed to create webinar registration");
+    }
 
     return {
       orderId: order.id,
@@ -52,6 +61,7 @@ export const verifyWebinarPayment = createServerFn({ method: "POST" })
     }) => data,
   )
   .handler(async ({ data }) => {
+    const db = getDb();
     const body = `${data.razorpay_order_id}|${data.razorpay_payment_id}`;
     const expectedSignature = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
@@ -69,7 +79,7 @@ export const verifyWebinarPayment = createServerFn({ method: "POST" })
       .returning();
 
     if (registration) {
-      await sendWebinarConfirmation(registration);
+      // await sendWebinarConfirmation(registration);
     }
 
     return { success: true };

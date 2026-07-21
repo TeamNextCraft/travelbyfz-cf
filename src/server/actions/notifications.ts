@@ -1,8 +1,7 @@
-// src/server/actions/notifications.ts
 // import { Resend } from "resend";
-//
+
 // const resend = new Resend(process.env.RESEND_API_KEY);
-//
+
 // export async function sendWebinarConfirmation(registration: {
 //   name: string;
 //   email: string;
@@ -20,7 +19,7 @@
 //       <p>The Zoom link will be shared 1 day before the webinar on this email and WhatsApp.</p>
 //     `,
 //   });
-//
+
 //   await fetch(`https://graph.facebook.com/v20.0/${process.env.WA_PHONE_ID}/messages`, {
 //     method: "POST",
 //     headers: {
