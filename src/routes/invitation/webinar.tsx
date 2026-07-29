@@ -1,11 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import * as React from "react";
 import {
-  CalendarDays, CheckCircle2, Clock3, Gift, MessageCircle,
-   Sparkles, Users, Video,  Star,
+  CalendarDays,
+  CheckCircle2,
+  Clock3,
+  Gift,
+  MessageCircle,
+  Sparkles,
+  Users,
+  Video,
+  Star,
 } from "lucide-react";
 import { Badge } from "#/components/ui/badge";
-import { buttonVariants } from "#/components/ui/button";
+import { Button, buttonVariants } from "#/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
 import { WebinarRegistrationForm } from "#/components/common/webinar-registration-form";
 
@@ -96,7 +103,10 @@ function useCountdown(target: Date) {
   const [timeLeft, setTimeLeft] = React.useState(target.getTime() - Date.now());
 
   React.useEffect(() => {
-    const id = setInterval(() => setTimeLeft(target.getTime() - Date.now()), 1000);
+    const id = setInterval(
+      () => setTimeLeft(target.getTime() - Date.now()),
+      1000,
+    );
     return () => clearInterval(id);
   }, [target]);
 
@@ -110,8 +120,31 @@ function useCountdown(target: Date) {
 }
 
 function WebinarPage() {
-  const webinarDate = React.useMemo(() => new Date("2026-08-16T11:00:00+05:30"), []);
+  const webinarDate = React.useMemo(
+    () => new Date("2026-08-30T11:00:00+05:30"),
+    [],
+  );
+  const webinarEndTime = new Date(webinarDate.getTime() + 2 * 60 * 60 * 1000);
   const countdown = useCountdown(webinarDate);
+
+  const dateFormatter = new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const weekdayFormatter = new Intl.DateTimeFormat("en-IN", {
+    weekday: "short",
+  });
+
+  const timeFormatter = new Intl.DateTimeFormat("en-IN", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  const formattedDate = `${dateFormatter.format(webinarDate)} (${weekdayFormatter.format(webinarDate)})`;
+  const formattedTimeRange = `${timeFormatter.format(webinarDate)} – ${timeFormatter.format(webinarEndTime)}`;
 
   return (
     <main className="bg-[#faf9f6]">
@@ -141,14 +174,14 @@ function WebinarPage() {
               <CalendarDays className="size-5 text-amber-300" />
               <div>
                 <p className="text-xs text-slate-400">Date</p>
-                <p className="text-sm font-semibold">16 August 2026 (Sun)</p>
+                <p className="text-sm font-semibold">{formattedDate}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
               <Clock3 className="size-5 text-amber-300" />
               <div>
                 <p className="text-xs text-slate-400">Time</p>
-                <p className="text-sm font-semibold">11:00 AM – 1:00 PM</p>
+                <p className="text-sm font-semibold">{formattedTimeRange}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -168,7 +201,10 @@ function WebinarPage() {
                 { label: "Min", value: countdown.minutes },
                 { label: "Sec", value: countdown.seconds },
               ].map((item) => (
-                <div key={item.label} className="rounded-xl bg-white/10 px-4 py-3 text-center">
+                <div
+                  key={item.label}
+                  className="rounded-xl bg-white/10 px-4 py-3 text-center"
+                >
                   <p className="text-xl font-bold tabular-nums">{item.value}</p>
                   <p className="text-xs text-slate-400">{item.label}</p>
                 </div>
@@ -179,18 +215,21 @@ function WebinarPage() {
           <div className="mt-8 flex items-center gap-4">
             <div>
               <span className="text-3xl font-bold text-white">₹199</span>
-              <span className="ml-2 text-lg text-slate-400 line-through">₹1,999</span>
+              <span className="ml-2 text-lg text-slate-400 line-through">
+                ₹1,999
+              </span>
             </div>
-            <Badge className="bg-emerald-500/15 text-emerald-300">90% OFF Today</Badge>
+            <Badge className="bg-emerald-500/15 text-emerald-300">
+              90% OFF Today
+            </Badge>
           </div>
-
+          
           <a
             href="#register"
-            className={buttonVariants({
-              className: "mt-6 bg-amber-500 text-slate-950 hover:bg-amber-400",
-            })}
           >
+          <Button variant={"default"} className="mt-6 cursor-pointer">  
             Reserve Your Seat Now
+          </Button>
           </a>
 
           <p className="mt-3 text-xs text-slate-500">
@@ -206,7 +245,10 @@ function WebinarPage() {
         </h2>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {audienceList.map((item) => (
-            <div key={item} className="flex items-start gap-3 rounded-xl border border-border/60 bg-white p-4 shadow-sm">
+            <div
+              key={item}
+              className="flex items-start gap-3 rounded-xl border border-border/60 bg-white p-4 shadow-sm"
+            >
               <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-600" />
               <p className="text-sm text-slate-700">{item}</p>
             </div>
@@ -222,7 +264,10 @@ function WebinarPage() {
           </h2>
           <div className="mt-6 space-y-3">
             {problems.map((item) => (
-              <p key={item} className="rounded-xl bg-white p-4 text-sm leading-7 text-slate-700 shadow-sm">
+              <p
+                key={item}
+                className="rounded-xl bg-white p-4 text-sm leading-7 text-slate-700 shadow-sm"
+              >
                 {item}
               </p>
             ))}
@@ -232,16 +277,23 @@ function WebinarPage() {
 
       {/* Modules */}
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">What You'll Learn</h2>
+        <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+          What You'll Learn
+        </h2>
         <div className="mt-6 space-y-5">
           {modules.map((mod, idx) => (
-            <Card key={mod.title} className="rounded-2xl border-border/60 bg-white shadow-sm">
+            <Card
+              key={mod.title}
+              className="rounded-2xl border-border/60 bg-white shadow-sm"
+            >
               <CardHeader>
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-xl bg-amber-50 text-sm font-bold text-amber-700">
                     {idx + 1}
                   </div>
-                  <CardTitle className="text-xl text-slate-900">{mod.title}</CardTitle>
+                  <CardTitle className="text-xl text-slate-900">
+                    {mod.title}
+                  </CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="grid gap-2 sm:grid-cols-2">
@@ -261,7 +313,9 @@ function WebinarPage() {
       <section className="border-y bg-slate-950 text-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
-            <h2 className="text-2xl font-bold sm:text-3xl">After This Webinar You Will</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">
+              After This Webinar You Will
+            </h2>
             <div className="mt-6 space-y-3">
               {outcomes.map((item) => (
                 <div key={item} className="flex items-start gap-3">
@@ -278,7 +332,10 @@ function WebinarPage() {
               {liveReasons.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.text} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div
+                    key={item.text}
+                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-4"
+                  >
                     <Icon className="size-5 text-amber-300" />
                     <p className="text-sm font-medium">{item.text}</p>
                   </div>
@@ -302,7 +359,10 @@ function WebinarPage() {
           </CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-3">
             {bonuses.map((item) => (
-              <div key={item} className="flex items-start gap-2 rounded-xl bg-white p-4 shadow-sm">
+              <div
+                key={item}
+                className="flex items-start gap-2 rounded-xl bg-white p-4 shadow-sm"
+              >
                 <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-amber-700" />
                 <p className="text-sm text-slate-700">{item}</p>
               </div>
@@ -311,23 +371,25 @@ function WebinarPage() {
         </Card>
 
         <p className="mt-6 rounded-xl border border-border/60 bg-slate-50 p-4 text-sm leading-7 text-slate-600">
-          <strong>Important note:</strong> This webinar is designed for educational
-          purposes and is ideal for beginners who want to understand the travel
-          industry and explore business opportunities from home.
+          <strong>Important note:</strong> This webinar is designed for
+          educational purposes and is ideal for beginners who want to understand
+          the travel industry and explore business opportunities from home.
         </p>
       </section>
 
       {/* Registration form */}
       <section id="register" className="border-t bg-[#6f5516]">
-        <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8 ">
           <div className="text-center text-white">
-            <h2 className="text-2xl font-bold sm:text-3xl">Reserve Your Seat Today</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">
+              Reserve Your Seat Today
+            </h2>
             <p className="mt-2 text-sm text-amber-100/90">
-              16 August 2026 · 11:00 AM – 1:00 PM · Zoom Live
+              {formattedDate} | {formattedTimeRange} · Zoom Live
             </p>
           </div>
 
-          <Card className="mt-8 rounded-2xl border-none bg-white shadow-xl">
+          <Card className="mt-8 rounded-2xl border-none bg-white shadow-xl max-sm:mb-10">
             <CardContent className="p-6 sm:p-8">
               <WebinarRegistrationForm />
             </CardContent>
@@ -336,16 +398,15 @@ function WebinarPage() {
       </section>
 
       {/* Sticky mobile CTA */}
-      {/* <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white p-3 shadow-lg lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white p-3 shadow-lg lg:hidden">
         <a
           href="#register"
-          className={buttonVariants({
-            className: "w-full bg-slate-900 text-white hover:bg-slate-800",
-          })}
         >
-          Reserve Seat — ₹199 Only
+          <Button className="w-full">    
+            Reserve Seat — ₹199 Only
+          </Button>
         </a>
-      </div> */}
+      </div>
     </main>
   );
 }
